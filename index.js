@@ -25,21 +25,22 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
 app.post('/api/shorturl', function (req, res) {
   let origin = req.body.url;
   originUrl = origin;
-  const stringIsAValidUrl = (s) => {
-    try {
-      new URL(s);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  };
-  if(stringIsAValidUrl(originUrl)) {
+  if(isValidUrl(originUrl)) {
     res.json({ original_url: origin, short_url: shortUrl });
   } else {
-    res.json({"error":"Invalid URL"});
+    res.json({"error":"invalid url"});
   }
 });
 
