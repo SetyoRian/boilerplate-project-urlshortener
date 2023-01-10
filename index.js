@@ -40,9 +40,7 @@ app.post('/api/shorturl', function (req, res) {
   if(isValidUrl(originUrl)) {
     res.json({ original_url: origin, short_url: shortUrl });
   } else {
-    res.json({
-      "error": "Invalid URL"
-    });
+    res.json({"error":"invalid url"});
   }
 });
 
