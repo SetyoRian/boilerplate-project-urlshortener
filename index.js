@@ -25,22 +25,14 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-function isValidUrl(string) {
-  try {
-    new URL(string);
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
-
 app.post('/api/shorturl', function (req, res) {
   let origin = req.body.url;
   originUrl = origin;
-  if(isValidUrl(originUrl)) {
+  let urlRegex = new RegExp (/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)
+  if(inputUrl.match(urlRegex)) {
     res.json({ original_url: origin, short_url: shortUrl });
   } else {
-    res.status(200).json({"error":"invalid url"});
+    res.json({"error":"invalid url"});
   }
 });
 
