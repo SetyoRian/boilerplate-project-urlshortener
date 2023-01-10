@@ -29,7 +29,7 @@ app.post('/api/shorturl', function (req, res) {
   let origin = req.body.url;
   originUrl = origin;
   let urlRegex = new RegExp (/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)
-  if(inputUrl.match(urlRegex)) {
+  if(originUrl.match(urlRegex)) {
     res.json({ original_url: origin, short_url: shortUrl });
   } else {
     res.json({"error":"invalid url"});
